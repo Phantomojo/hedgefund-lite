@@ -1,0 +1,521 @@
+{
+  "analysis": {
+    "forex": {
+      "EUR_USD": {
+        "pair": "EUR_USD",
+        "current_price": 1.085,
+        "trend": "sideways",
+        "rsi": 37.22,
+        "macd": 0.001,
+        "volatility": 1.45,
+        "support": 1.0526,
+        "resistance": 1.0964,
+        "risk_reward": 2.34,
+        "confidence": 0.72,
+        "recommendation": "hold"
+      },
+      "GBP_USD": {
+        "pair": "GBP_USD",
+        "current_price": 1.25,
+        "trend": "bullish",
+        "rsi": 59.37,
+        "macd": 0.0009,
+        "volatility": 1.15,
+        "support": 1.2129,
+        "resistance": 1.2779,
+        "risk_reward": 1.55,
+        "confidence": 0.89,
+        "recommendation": "buy"
+      },
+      "USD_JPY": {
+        "pair": "USD_JPY",
+        "current_price": 150.0,
+        "trend": "bearish",
+        "rsi": 41.85,
+        "macd": -0.0008,
+        "volatility": 0.67,
+        "support": 148.1115,
+        "resistance": 154.3192,
+        "risk_reward": 1.74,
+        "confidence": 0.88,
+        "recommendation": "sell"
+      },
+      "USD_CHF": {
+        "pair": "USD_CHF",
+        "current_price": 0.9,
+        "trend": "sideways",
+        "rsi": 62.2,
+        "macd": -0.0002,
+        "volatility": 1.33,
+        "support": 0.8822,
+        "resistance": 0.9156,
+        "risk_reward": 2.24,
+        "confidence": 0.64,
+        "recommendation": "hold"
+      },
+      "AUD_USD": {
+        "pair": "AUD_USD",
+        "current_price": 0.9,
+        "trend": "bullish",
+        "rsi": 54.73,
+        "macd": 0.0007,
+        "volatility": 1.76,
+        "support": 0.8756,
+        "resistance": 0.9223,
+        "risk_reward": 2.16,
+        "confidence": 0.63,
+        "recommendation": "hold"
+      },
+      "USD_CAD": {
+        "pair": "USD_CAD",
+        "current_price": 0.9,
+        "trend": "bullish",
+        "rsi": 60.78,
+        "macd": 0.0014,
+        "volatility": 1.35,
+        "support": 0.8885,
+        "resistance": 0.9133,
+        "risk_reward": 1.54,
+        "confidence": 0.73,
+        "recommendation": "buy"
+      },
+      "NZD_USD": {
+        "pair": "NZD_USD",
+        "current_price": 0.9,
+        "trend": "bullish",
+        "rsi": 69.09,
+        "macd": 0.0013,
+        "volatility": 1.23,
+        "support": 0.8769,
+        "resistance": 0.9254,
+        "risk_reward": 1.52,
+        "confidence": 0.82,
+        "recommendation": "buy"
+      },
+      "EUR_GBP": {
+        "pair": "EUR_GBP",
+        "current_price": 1.085,
+        "trend": "bullish",
+        "rsi": 63.8,
+        "macd": 0.0001,
+        "volatility": 1.73,
+        "support": 1.0617,
+        "resistance": 1.1096,
+        "risk_reward": 2.76,
+        "confidence": 0.83,
+        "recommendation": "buy"
+      }
+    },
+    "stocks": {
+      "AAPL": {
+        "symbol": "AAPL",
+        "current_price": 180,
+        "trend": "sideways",
+        "rsi": 68.09,
+        "macd": -0.46,
+        "volatility": 1.38,
+        "pe_ratio": 18.32,
+        "market_cap": "$1232.4M",
+        "confidence": 0.84,
+        "recommendation": "hold"
+      },
+      "MSFT": {
+        "symbol": "MSFT",
+        "current_price": 350,
+        "trend": "sideways",
+        "rsi": 45.96,
+        "macd": 1.62,
+        "volatility": 1.88,
+        "pe_ratio": 20.1,
+        "market_cap": "$2019.2M",
+        "confidence": 0.69,
+        "recommendation": "hold"
+      },
+      "GOOGL": {
+        "symbol": "GOOGL",
+        "current_price": 140,
+        "trend": "sideways",
+        "rsi": 34.91,
+        "macd": 1.16,
+        "volatility": 1.35,
+        "pe_ratio": 29.0,
+        "market_cap": "$634.7M",
+        "confidence": 0.64,
+        "recommendation": "hold"
+      },
+      "AMZN": {
+        "symbol": "AMZN",
+        "current_price": 130,
+        "trend": "sideways",
+        "rsi": 34.97,
+        "macd": 1.43,
+        "volatility": 2.91,
+        "pe_ratio": 19.8,
+        "market_cap": "$636.7M",
+        "confidence": 0.79,
+        "recommendation": "hold"
+      },
+      "TSLA": {
+        "symbol": "TSLA",
+        "current_price": 250,
+        "trend": "sideways",
+        "rsi": 60.32,
+        "macd": -0.71,
+        "volatility": 2.08,
+        "pe_ratio": 26.81,
+        "market_cap": "$2116.0M",
+        "confidence": 0.72,
+        "recommendation": "hold"
+      },
+      "NVDA": {
+        "symbol": "NVDA",
+        "current_price": 450,
+        "trend": "bearish",
+        "rsi": 36.25,
+        "macd": -0.31,
+        "volatility": 1.45,
+        "pe_ratio": 17.82,
+        "market_cap": "$4167.8M",
+        "confidence": 0.8,
+        "recommendation": "sell"
+      },
+      "META": {
+        "symbol": "META",
+        "current_price": 300,
+        "trend": "sideways",
+        "rsi": 67.84,
+        "macd": -0.73,
+        "volatility": 1.35,
+        "pe_ratio": 19.26,
+        "market_cap": "$1168.5M",
+        "confidence": 0.88,
+        "recommendation": "hold"
+      },
+      "NFLX": {
+        "symbol": "NFLX",
+        "current_price": 500,
+        "trend": "bearish",
+        "rsi": 48.37,
+        "macd": -0.46,
+        "volatility": 1.12,
+        "pe_ratio": 31.36,
+        "market_cap": "$2258.6M",
+        "confidence": 0.86,
+        "recommendation": "sell"
+      },
+      "SPY": {
+        "symbol": "SPY",
+        "current_price": 450,
+        "trend": "bearish",
+        "rsi": 41.39,
+        "macd": -1.6,
+        "volatility": 2.57,
+        "pe_ratio": 22.6,
+        "market_cap": "$1872.2M",
+        "confidence": 0.85,
+        "recommendation": "sell"
+      },
+      "QQQ": {
+        "symbol": "QQQ",
+        "current_price": 380,
+        "trend": "bullish",
+        "rsi": 52.92,
+        "macd": 1.25,
+        "volatility": 1.67,
+        "pe_ratio": 17.84,
+        "market_cap": "$3249.0M",
+        "confidence": 0.65,
+        "recommendation": "hold"
+      },
+      "IWM": {
+        "symbol": "IWM",
+        "current_price": 180,
+        "trend": "bearish",
+        "rsi": 40.81,
+        "macd": -0.94,
+        "volatility": 2.12,
+        "pe_ratio": 32.64,
+        "market_cap": "$1178.4M",
+        "confidence": 0.81,
+        "recommendation": "sell"
+      },
+      "VTI": {
+        "symbol": "VTI",
+        "current_price": 240,
+        "trend": "bullish",
+        "rsi": 50.42,
+        "macd": 1.71,
+        "volatility": 2.72,
+        "pe_ratio": 22.83,
+        "market_cap": "$1644.2M",
+        "confidence": 0.67,
+        "recommendation": "hold"
+      }
+    },
+    "crypto": {
+      "BTC": {
+        "symbol": "BTC",
+        "current_price": 65000,
+        "trend": "sideways",
+        "rsi": 59.97,
+        "macd": -92.74,
+        "volatility": 3.35,
+        "market_cap": "$273031.1M",
+        "volume_24h": "$46218.4M",
+        "confidence": 0.56,
+        "recommendation": "hold"
+      },
+      "ETH": {
+        "symbol": "ETH",
+        "current_price": 3500,
+        "trend": "sideways",
+        "rsi": 47.82,
+        "macd": 84.19,
+        "volatility": 3.11,
+        "market_cap": "$111275.4M",
+        "volume_24h": "$17123.9M",
+        "confidence": 0.85,
+        "recommendation": "hold"
+      },
+      "BNB": {
+        "symbol": "BNB",
+        "current_price": 600,
+        "trend": "sideways",
+        "rsi": 64.79,
+        "macd": -13.38,
+        "volatility": 7.92,
+        "market_cap": "$38417.0M",
+        "volume_24h": "$5439.4M",
+        "confidence": 0.73,
+        "recommendation": "hold"
+      },
+      "SOL": {
+        "symbol": "SOL",
+        "current_price": 120,
+        "trend": "sideways",
+        "rsi": 44.07,
+        "macd": 82.27,
+        "volatility": 5.37,
+        "market_cap": "$8931.3M",
+        "volume_24h": "$1684.1M",
+        "confidence": 0.78,
+        "recommendation": "hold"
+      },
+      "ADA": {
+        "symbol": "ADA",
+        "current_price": 0.45,
+        "trend": "bullish",
+        "rsi": 62.28,
+        "macd": 53.11,
+        "volatility": 6.82,
+        "market_cap": "$6.0M",
+        "volume_24h": "$0.4M",
+        "confidence": 0.79,
+        "recommendation": "buy"
+      },
+      "DOT": {
+        "symbol": "DOT",
+        "current_price": 7.5,
+        "trend": "sideways",
+        "rsi": 47.03,
+        "macd": 81.41,
+        "volatility": 5.42,
+        "market_cap": "$98.4M",
+        "volume_24h": "$5.9M",
+        "confidence": 0.75,
+        "recommendation": "hold"
+      },
+      "LINK": {
+        "symbol": "LINK",
+        "current_price": 15,
+        "trend": "bullish",
+        "rsi": 79.89,
+        "macd": 62.28,
+        "volatility": 6.03,
+        "market_cap": "$181.4M",
+        "volume_24h": "$26.7M",
+        "confidence": 0.76,
+        "recommendation": "buy"
+      },
+      "MATIC": {
+        "symbol": "MATIC",
+        "current_price": 0.8,
+        "trend": "sideways",
+        "rsi": 39.13,
+        "macd": 3.61,
+        "volatility": 6.39,
+        "market_cap": "$72.7M",
+        "volume_24h": "$6.1M",
+        "confidence": 0.55,
+        "recommendation": "hold"
+      }
+    },
+    "commodities": {
+      "GC=F": {
+        "symbol": "GC=F",
+        "current_price": 2000,
+        "trend": "bullish",
+        "rsi": 52.61,
+        "macd": 3.57,
+        "volatility": 1.9,
+        "confidence": 0.88,
+        "recommendation": "buy"
+      },
+      "SI=F": {
+        "symbol": "SI=F",
+        "current_price": 25,
+        "trend": "sideways",
+        "rsi": 68.97,
+        "macd": -4.66,
+        "volatility": 3.46,
+        "confidence": 0.83,
+        "recommendation": "hold"
+      },
+      "CL=F": {
+        "symbol": "CL=F",
+        "current_price": 80,
+        "trend": "sideways",
+        "rsi": 69.71,
+        "macd": -4.61,
+        "volatility": 3.0,
+        "confidence": 0.83,
+        "recommendation": "hold"
+      },
+      "NG=F": {
+        "symbol": "NG=F",
+        "current_price": 3.5,
+        "trend": "bearish",
+        "rsi": 37.6,
+        "macd": -1.92,
+        "volatility": 3.82,
+        "confidence": 0.8,
+        "recommendation": "sell"
+      },
+      "ZC=F": {
+        "symbol": "ZC=F",
+        "current_price": 450,
+        "trend": "bullish",
+        "rsi": 61.88,
+        "macd": 4.49,
+        "volatility": 2.88,
+        "confidence": 0.79,
+        "recommendation": "buy"
+      },
+      "ZS=F": {
+        "symbol": "ZS=F",
+        "current_price": 1200,
+        "trend": "bearish",
+        "rsi": 41.38,
+        "macd": -3.58,
+        "volatility": 3.68,
+        "confidence": 0.71,
+        "recommendation": "sell"
+      }
+    },
+    "timestamp": "2025-08-31T19:03:56.915694"
+  },
+  "strategy": {
+    "capital": 100000,
+    "total_invested": 24425.54,
+    "cash_reserve": 75574.46,
+    "total_expected_return": 34140.0,
+    "expected_roi": 34.14,
+    "portfolio_diversification": 3,
+    "positions": [
+      {
+        "asset": "GBP_USD",
+        "asset_class": "forex",
+        "recommendation": "buy",
+        "confidence": 0.89,
+        "position_value": 2695.65,
+        "position_size_pct": 2.7,
+        "risk_amount": 2000.0,
+        "expected_return": 3100.0,
+        "current_price": 1.25
+      },
+      {
+        "asset": "GC=F",
+        "asset_class": "commodities",
+        "recommendation": "buy",
+        "confidence": 0.88,
+        "position_value": 2105.26,
+        "position_size_pct": 2.11,
+        "risk_amount": 2000.0,
+        "expected_return": 4000.0,
+        "current_price": 2000
+      },
+      {
+        "asset": "USD_JPY",
+        "asset_class": "forex",
+        "recommendation": "sell",
+        "confidence": 0.88,
+        "position_value": 5194.03,
+        "position_size_pct": 5.19,
+        "risk_amount": 2000.0,
+        "expected_return": 3480.0,
+        "current_price": 150.0
+      },
+      {
+        "asset": "NFLX",
+        "asset_class": "stocks",
+        "recommendation": "sell",
+        "confidence": 0.86,
+        "position_value": 4464.29,
+        "position_size_pct": 4.46,
+        "risk_amount": 2000.0,
+        "expected_return": 5000.0,
+        "current_price": 500
+      },
+      {
+        "asset": "SPY",
+        "asset_class": "stocks",
+        "recommendation": "sell",
+        "confidence": 0.85,
+        "position_value": 1945.53,
+        "position_size_pct": 1.95,
+        "risk_amount": 2000.0,
+        "expected_return": 5000.0,
+        "current_price": 450
+      },
+      {
+        "asset": "EUR_GBP",
+        "asset_class": "forex",
+        "recommendation": "buy",
+        "confidence": 0.83,
+        "position_value": 3190.75,
+        "position_size_pct": 3.19,
+        "risk_amount": 2000.0,
+        "expected_return": 5520.0,
+        "current_price": 1.085
+      },
+      {
+        "asset": "NZD_USD",
+        "asset_class": "forex",
+        "recommendation": "buy",
+        "confidence": 0.82,
+        "position_value": 2471.54,
+        "position_size_pct": 2.47,
+        "risk_amount": 2000.0,
+        "expected_return": 3040.0,
+        "current_price": 0.9
+      },
+      {
+        "asset": "IWM",
+        "asset_class": "stocks",
+        "recommendation": "sell",
+        "confidence": 0.81,
+        "position_value": 2358.49,
+        "position_size_pct": 2.36,
+        "risk_amount": 2000.0,
+        "expected_return": 5000.0,
+        "current_price": 180
+      }
+    ],
+    "risk_metrics": {
+      "max_drawdown": 15.0,
+      "var_95": 1221.28,
+      "sharpe_ratio": 1.8,
+      "correlation_limit": 0.7
+    }
+  }
+}

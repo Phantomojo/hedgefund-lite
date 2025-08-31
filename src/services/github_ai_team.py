@@ -51,10 +51,19 @@ class GitHubAITeam:
             raise ValueError("GITHUB_TOKEN environment variable is required")
         
         # Initialize OpenAI client for GitHub models
-        self.openai_client = OpenAI(
-            base_url=self.endpoint,
-            api_key=self.token,
-        )
+        try:
+            self.openai_client = OpenAI(
+                base_url=self.endpoint,
+                api_key=self.token,
+            )
+        except TypeError as e:
+            # Handle compatibility issues with older httpx versions
+            import httpx
+            self.openai_client = OpenAI(
+                base_url=self.endpoint,
+                api_key=self.token,
+                http_client=httpx.Client(timeout=30.0)
+            )
         
         # Initialize Azure client for additional models
         self.azure_client = ChatCompletionsClient(

@@ -1,0 +1,149 @@
+name: 🚀 Feature Request
+description: Suggest an idea for this project
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees: ["Phantomojo"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! 🚀
+        
+        Please provide as much detail as possible to help us understand and implement your request.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🎯 Problem Statement
+      description: Is your feature request related to a problem? Please describe
+      placeholder: I'm always frustrated when [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: Describe the solution you'd like
+      placeholder: It would be great if [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternative Solutions
+      description: Describe any alternative solutions or features you've considered
+      placeholder: I also considered [...]
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: ⚡ Priority
+      description: How important is this feature to you?
+      options:
+        - Critical - Essential for core functionality
+        - High - Important for user experience
+        - Medium - Nice to have
+        - Low - Would be cool but not essential
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🧩 Component
+      description: Which component would this feature affect?
+      options:
+        - API/Backend
+        - Trading Engine
+        - Risk Management
+        - Data Ingestion
+        - AI Models
+        - Dashboard/Frontend
+        - Database
+        - Docker/Deployment
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: 📋 Use Cases
+      description: Describe specific use cases for this feature
+      placeholder: |
+        - Use case 1: [Description]
+        - Use case 2: [Description]
+        - Use case 3: [Description]
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: What would make this feature complete?
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical_details
+    attributes:
+      label: 🔧 Technical Details
+      description: Any technical considerations or implementation details
+      placeholder: |
+        - Performance requirements
+        - Security considerations
+        - Integration points
+        - Data requirements
+    validations:
+      required: false
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: 🎨 Mockups/Designs
+      description: If applicable, add mockups, screenshots, or design concepts
+      placeholder: |
+        - UI mockups
+        - API design
+        - Database schema
+        - Architecture diagrams
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: 📚 Examples
+      description: Are there any existing implementations or examples?
+      placeholder: |
+        - Similar features in other projects
+        - Industry standards
+        - Research papers
+        - Open source examples
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 📋 Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have provided clear acceptance criteria
+          required: true
+        - label: This feature aligns with the project's goals
+          required: true
+        - label: I'm willing to help implement this feature
+          required: false

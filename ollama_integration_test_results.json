@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-08-31T15:53:06.829325",
+  "ollama_status": {
+    "status": "running",
+    "available_models": [
+      "codellama:7b"
+    ],
+    "total_models": 1,
+    "base_url": "http://localhost:11434"
+  },
+  "available_models": [
+    "codellama:7b"
+  ],
+  "total_models": 1,
+  "test_successful": true
+}

@@ -15,7 +15,8 @@ from src.api.v1.endpoints import (
     auth,
     ai,
     ai_models,
-    github_ai_team
+    github_ai_team,
+    ollama
 )
 
 api_router = APIRouter()
@@ -32,3 +33,4 @@ api_router.include_router(monitoring.router, prefix="/monitoring", tags=["monito
 api_router.include_router(ai.router, prefix="/ai", tags=["ai"])
 api_router.include_router(ai_models.router, prefix="/ai-models", tags=["ai models"])
 api_router.include_router(github_ai_team.router, prefix="/github-ai-team", tags=["github ai team"])
+api_router.include_router(ollama.router, prefix="/ollama", tags=["ollama"])

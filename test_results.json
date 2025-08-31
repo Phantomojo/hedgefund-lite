@@ -1,0 +1,92 @@
+[
+  {
+    "test": "Server Health Check",
+    "success": true,
+    "details": "Status: healthy",
+    "timestamp": "2025-08-31T12:35:40.496968+00:00"
+  },
+  {
+    "test": "Root Endpoint",
+    "success": true,
+    "details": "Message: Autonomous Forex Trading Agent",
+    "timestamp": "2025-08-31T12:35:40.498360+00:00"
+  },
+  {
+    "test": "Metrics Endpoint",
+    "success": true,
+    "details": "Metrics retrieved successfully",
+    "timestamp": "2025-08-31T12:35:40.499678+00:00"
+  },
+  {
+    "test": "API Documentation",
+    "success": true,
+    "details": "Swagger docs accessible",
+    "timestamp": "2025-08-31T12:35:40.501042+00:00"
+  },
+  {
+    "test": "Authentication System",
+    "success": true,
+    "details": "Login successful with admin/password",
+    "timestamp": "2025-08-31T12:35:40.515707+00:00"
+  },
+  {
+    "test": "Market Data (EURUSD)",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.518408+00:00"
+  },
+  {
+    "test": "AI Market Analysis",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.526852+00:00"
+  },
+  {
+    "test": "AI Strategy Generation",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.530542+00:00"
+  },
+  {
+    "test": "Strategies List",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.534340+00:00"
+  },
+  {
+    "test": "Trading Execution",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.537867+00:00"
+  },
+  {
+    "test": "Portfolio Metrics",
+    "success": true,
+    "details": "Portfolio metrics retrieved successfully",
+    "timestamp": "2025-08-31T12:35:40.541419+00:00"
+  },
+  {
+    "test": "Risk Metrics",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.544674+00:00"
+  },
+  {
+    "test": "Monitoring Health",
+    "success": true,
+    "details": "Monitoring health check successful",
+    "timestamp": "2025-08-31T12:35:40.548117+00:00"
+  },
+  {
+    "test": "Emergency Endpoints",
+    "success": true,
+    "details": "Emergency endpoints accessible (auth required)",
+    "timestamp": "2025-08-31T12:35:40.550498+00:00"
+  },
+  {
+    "test": "News Data",
+    "success": false,
+    "details": "HTTP 500: {\"detail\":\"Internal server error\"}",
+    "timestamp": "2025-08-31T12:35:40.553398+00:00"
+  }
+]

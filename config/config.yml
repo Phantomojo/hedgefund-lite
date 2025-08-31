@@ -1,0 +1,424 @@
+# Forex Trading System Configuration
+# Inspired by Vanta-ledger architecture
+
+# Environment Configuration
+environment:
+  name: "development"  # development, staging, production
+  debug: true
+  log_level: "INFO"
+  timezone: "UTC"
+
+# Database Configuration
+database:
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "forex_trading"
+    username: "trading"
+    password: "trading"
+    pool_size: 10
+    max_overflow: 20
+    echo: false
+  
+  mongodb:
+    host: "localhost"
+    port: 27017
+    database: "forex_trading"
+    username: "trading"
+    password: "trading"
+    max_pool_size: 100
+  
+  redis:
+    host: "localhost"
+    port: 6379
+    database: 0
+    password: null
+    max_connections: 20
+
+# Broker Configuration
+broker:
+  name: "oanda"  # oanda, fxcm, ig, etc.
+  environment: "practice"  # practice, live
+  api_key: "1725da5aa30805b09b7c7eb0094ffff4-d6b1be348877531faa9a3253cbda3cfd"
+  api_secret: ""  # OANDA doesn't use secret
+  account_id: "101-001-36248121-001"  # Full OANDA Account ID
+  base_url: "https://api-fxpractice.oanda.com"
+  
+  # Connection settings
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 1
+
+# Risk Management Configuration
+risk:
+  # Position limits
+  max_drawdown_pct: 15.0
+  per_trade_risk_pct: 0.75
+  daily_loss_limit_pct: 5.0
+  max_leverage: 10.0
+  var_limit_pct: 5.0
+  correlation_limit: 0.7
+  max_positions_per_strategy: 3
+  max_total_positions: 10
+  
+  # Position sizing
+  min_lot_size: 0.01
+  max_lot_size: 10.0
+  default_slippage_pips: 2.0
+  commission_per_lot: 7.0
+  
+  # Emergency controls
+  emergency_stop_enabled: true
+  auto_close_on_drawdown: true
+  circuit_breaker_enabled: true
+
+# Trading Configuration
+trading:
+  # Allowed currency pairs
+  allowed_pairs:
+    - "EURUSD"
+    - "GBPUSD"
+    - "USDJPY"
+    - "AUDUSD"
+    - "USDCAD"
+    - "NZDUSD"
+    - "EURGBP"
+    - "GBPJPY"
+    - "EURJPY"
+    - "AUDCAD"
+  
+  # Timeframes
+  default_timeframes:
+    - "1m"
+    - "5m"
+    - "15m"
+    - "30m"
+    - "1h"
+    - "4h"
+    - "1d"
+  
+  # Trading hours (UTC)
+  trading_hours:
+    start: "00:00"
+    end: "23:59"
+    timezone: "UTC"
+  
+  # Market data
+  data_source: "broker"  # broker, external_api, local
+  update_interval: 1  # seconds
+  history_days: 365
+
+# Strategy Configuration
+strategies:
+  # EMA Crossover Strategy
+  ema_crossover:
+    enabled: true
+    name: "ema_crossover_v1"
+    risk_pct: 0.5
+    max_positions: 3
+    timeframes: ["1h", "4h"]
+    pairs: ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD"]
+    parameters:
+      fast_period: 12
+      slow_period: 26
+      signal_period: 9
+      rsi_period: 14
+      rsi_oversold: 30
+      rsi_overbought: 70
+  
+  # RSI Mean Reversion Strategy
+  rsi_mean_reversion:
+    enabled: false
+    name: "rsi_mean_reversion_v1"
+    risk_pct: 0.5
+    max_positions: 3
+    timeframes: ["1h", "4h"]
+    pairs: ["EURUSD", "GBPUSD", "USDJPY"]
+    parameters:
+      rsi_period: 14
+      oversold_threshold: 30
+      overbought_threshold: 70
+      stop_loss_atr_multiplier: 2.0
+      take_profit_atr_multiplier: 3.0
+  
+  # Bollinger Bands Strategy
+  bollinger_bands:
+    enabled: false
+    name: "bollinger_bands_v1"
+    risk_pct: 0.5
+    max_positions: 3
+    timeframes: ["1h", "4h"]
+    pairs: ["EURUSD", "GBPUSD", "USDJPY"]
+    parameters:
+      period: 20
+      std_dev: 2.0
+      min_touch_count: 3
+
+# Machine Learning Configuration
+ml:
+  # Model storage
+  model_dir: "./models"
+  experiment_tracking: "mlflow"  # mlflow, wandb
+  
+  # Genetic Algorithm settings
+  genetic:
+    population_size: 100
+    generations: 50
+    mutation_rate: 0.1
+    crossover_rate: 0.8
+    elite_size: 10
+  
+  # Reinforcement Learning settings
+  reinforcement_learning:
+    episodes: 1000
+    learning_rate: 0.001
+    batch_size: 64
+    gamma: 0.99
+    epsilon_start: 1.0
+    epsilon_end: 0.01
+    epsilon_decay: 0.995
+  
+  # Model selection
+  models:
+    - name: "TinyLlama"
+      size_gb: 1.0
+      priority: 1
+    - name: "Phi-3 Mini"
+      size_gb: 2.1
+      priority: 2
+    - name: "Mistral 7B"
+      size_gb: 4.0
+      priority: 3
+
+# Backtesting Configuration
+backtesting:
+  # Data settings
+  start_date: "2023-01-01"
+  end_date: "2024-01-01"
+  initial_balance: 10000.0
+  
+  # Walk-forward settings
+  walk_forward:
+    enabled: true
+    window_size_days: 90
+    step_size_days: 30
+    min_trades_per_window: 10
+  
+  # Monte Carlo settings
+  monte_carlo:
+    enabled: true
+    simulations: 1000
+    confidence_level: 0.95
+  
+  # Performance metrics
+  metrics:
+    - "sharpe_ratio"
+    - "calmar_ratio"
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+    - "var_95"
+    - "var_99"
+
+# Monitoring Configuration
+monitoring:
+  # Prometheus settings
+  prometheus:
+    enabled: true
+    port: 9090
+    metrics_path: "/metrics"
+  
+  # Grafana settings
+  grafana:
+    enabled: true
+    port: 3001
+    admin_password: "admin"
+  
+  # Dashboard settings
+  dashboard:
+    enabled: true
+    port: 3000
+    refresh_interval: 5  # seconds
+  
+  # Alerting
+  alerts:
+    enabled: true
+    webhook_url: ""
+    telegram_bot_token: ""
+    telegram_chat_id: ""
+    email_smtp_server: ""
+    email_username: ""
+    email_password: ""
+  
+  # Logging
+  logging:
+    level: "INFO"
+    file: "./logs/trading.log"
+    max_size_mb: 100
+    backup_count: 5
+    format: "json"
+
+# External Services Configuration
+external_services:
+  # News API
+  news:
+    enabled: true
+    api_key: "a025383ef4974ff1a52d6d0484db191a"
+    sources: ["reuters", "bloomberg", "cnbc", "bbc-news"]
+    update_interval: 300  # 5 minutes
+  
+  # Finnhub API
+  finnhub:
+    enabled: true
+    api_key: "d2q0r71r01qnf9nn12r0d2q0r71r01qnf9nn12rg"
+    secret: "d2q0r71r01qnf9nn12sg"
+    update_interval: 60  # 1 minute
+  
+  # Alpha Vantage API
+  alpha_vantage:
+    enabled: true
+    api_key: "HY5M3D5IDQ6UIC0Z"
+    update_interval: 60  # 1 minute
+  
+  # X (Twitter) API
+  x_api:
+    enabled: true
+    api_key: "EHdQ8vvVuZHxbnGq9OS4nAb7clftr2fLzgCNrus35n7xposOog"
+    api_secret: "PgiluRTUYdddkHS9m9Gd8DOQ1"
+    bearer_token: "AAAAAAAAAAAAAAAAAAAAAHF83wEAAAAAO0Ux7eeHiNmlc4n6tobA%2FDhZTnY%3DSl1M9ZeWNmiO9VXUZxh2SGjfWB5JUP3ujjQisYLHoLSChg8aYn"
+    access_token: "1600201538659549208-DXlOHsC0pQ1G3kG1zbu9ikSjKnxZMx"
+    access_token_secret: "kWev78Vu8rbJWe1J1e8zHXV78tFx2KoyRhuUYFRLBMjur"
+    update_interval: 300  # 5 minutes
+  
+  # NASDAQ Data API
+  nasdaq:
+    enabled: true
+    api_key: "bArm_eYp_sjHRvCjRz7T"
+    update_interval: 3600  # 1 hour
+  
+  # Economic Calendar
+  economic_calendar:
+    enabled: true
+    sources: ["forex_factory", "investing_com"]
+    update_interval: 1800  # 30 minutes
+
+# Security Configuration
+security:
+  # Authentication
+  secret_key: "your-secret-key-here-change-in-production"
+  algorithm: "HS256"
+  access_token_expire_minutes: 30
+  
+  # API security
+  allowed_hosts: ["*"]
+  cors_origins: ["*"]
+  
+  # Master password system (inspired by Vanta-ledger)
+  master_password:
+    enabled: true
+    length: 64
+    expiry_minutes: 30
+    max_attempts: 3
+  
+  # Emergency controls
+  emergency:
+    kill_switch_enabled: true
+    auto_pause_on_anomaly: true
+    max_consecutive_losses: 5
+    max_daily_loss_pct: 5.0
+
+# Performance Configuration
+performance:
+  # Caching
+  cache:
+    enabled: true
+    ttl_seconds: 300
+    max_size: 1000
+  
+  # Rate limiting
+  rate_limits:
+    requests_per_minute: 1000
+    requests_per_hour: 10000
+  
+  # Connection pooling
+  connection_pool:
+    max_connections: 100
+    max_keepalive: 20
+    keepalive_timeout: 30
+
+# Deployment Configuration
+deployment:
+  # Docker settings
+  docker:
+    image_name: "forex-trading-system"
+    tag: "latest"
+    registry: ""
+  
+  # Kubernetes settings
+  kubernetes:
+    enabled: false
+    namespace: "forex-trading"
+    replicas: 1
+  
+  # Health checks
+  health_checks:
+    enabled: true
+    interval_seconds: 30
+    timeout_seconds: 10
+    failure_threshold: 3
+  
+  # Auto-scaling
+  auto_scaling:
+    enabled: false
+    min_replicas: 1
+    max_replicas: 10
+    target_cpu_utilization: 80
+    target_memory_utilization: 80
+
+# External Services Configuration
+external_services:
+  # News API
+  news:
+    enabled: false
+    api_key: ""
+    base_url: "https://newsapi.org/v2"
+  
+  # Sentiment Analysis
+  sentiment:
+    enabled: false
+    api_key: ""
+    base_url: ""
+  
+  # Economic Calendar
+  economic_calendar:
+    enabled: false
+    api_key: ""
+    base_url: ""
+
+# Backup Configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention_days: 30
+  storage:
+    type: "local"  # local, s3, gcs
+    path: "./backups"
+    compression: true
+
+# Testing Configuration
+testing:
+  # Unit tests
+  unit:
+    enabled: true
+    coverage_threshold: 80
+  
+  # Integration tests
+  integration:
+    enabled: true
+    test_database: "forex_trading_test"
+  
+  # Performance tests
+  performance:
+    enabled: false
+    max_response_time_ms: 1000
+    max_memory_mb: 512

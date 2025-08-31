@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trading Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-light: #ecf0f1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #2c3e50 100%);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: rgba(44, 62, 80, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-header {
+            background: rgba(52, 152, 219, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px 15px 0 0 !important;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(52, 152, 219, 0.1) 100%);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .trend-up {
+            color: var(--success-color);
+        }
+
+        .trend-down {
+            color: var(--danger-color);
+        }
+
+        .trend-neutral {
+            color: var(--warning-color);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
+            border: none;
+            border-radius: 25px;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #c0392b 100%);
+            border: none;
+            border-radius: 25px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .status-online {
+            background: var(--success-color);
+            box-shadow: 0 0 10px var(--success-color);
+        }
+
+        .status-offline {
+            background: var(--danger-color);
+            box-shadow: 0 0 10px var(--danger-color);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .trade-card {
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 10px;
+        }
+
+        .trade-buy {
+            border-left-color: var(--success-color);
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .trade-sell {
+            border-left-color: var(--danger-color);
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i>
+                AI Trading System
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">
+                    <span class="status-indicator status-online"></span>
+                    System Online
+                </span>
+                <span class="navbar-text">
+                    <i class="fas fa-clock me-1"></i>
+                    <span id="current-time"></span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- System Overview -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <div class="metric-value" id="account-balance">$100,000</div>
+                        <div class="metric-label">Account Balance</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <div class="metric-value" id="total-trades">0</div>
+                        <div class="metric-label">Total Trades</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <div class="metric-value" id="win-rate">0%</div>
+                        <div class="metric-label">Win Rate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <div class="metric-value" id="ai-confidence">85%</div>
+                        <div class="metric-label">AI Confidence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <!-- Market Analysis -->
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Market Analysis & AI Recommendations
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6>EUR/USD Analysis</h6>
+                                    <button class="btn btn-primary btn-sm" onclick="analyzeMarket()">
+                                        <i class="fas fa-sync-alt me-1"></i>
+                                        Refresh
+                                    </button>
+                                </div>
+                                <div id="market-analysis">
+                                    <div class="text-center">
+                                        <div class="loading"></div>
+                                        <p class="mt-2">Analyzing market...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="chart-container">
+                                    <canvas id="priceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autonomous Trading Control -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-robot me-2"></i>
+                            Autonomous Trading System
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="fw-bold">System Status:</span>
+                                    <span id="autonomous-status" class="badge bg-secondary">Stopped</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Active Trades:</span>
+                                    <span id="active-trades-count">0</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Total P&L:</span>
+                                    <span id="total-pnl">$0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Win Rate:</span>
+                                    <span id="win-rate-auto">0%</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Sharpe Ratio:</span>
+                                    <span id="sharpe-ratio">0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Max Drawdown:</span>
+                                    <span id="max-drawdown">0.0%</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Profit Factor:</span>
+                                    <span id="profit-factor">0.00</span>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success flex-fill" onclick="startAutonomousTrading()">
+                                        <i class="fas fa-play me-1"></i>
+                                        Start Auto Trading
+                                    </button>
+                                    <button class="btn btn-danger flex-fill" onclick="stopAutonomousTrading()">
+                                        <i class="fas fa-stop me-1"></i>
+                                        Stop Auto Trading
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="autonomous-info">
+                                    <div class="alert alert-info">
+                                        <h6><i class="fas fa-info-circle me-2"></i>Autonomous Trading</h6>
+                                        <p class="mb-2">The AI system will:</p>
+                                        <ul class="small mb-0">
+                                            <li>Monitor EUR/USD, GBP/USD, USD/JPY</li>
+                                            <li>Analyze markets every minute</li>
+                                            <li>Execute trades automatically</li>
+                                            <li>Manage risk (2% per trade)</li>
+                                            <li>Set stop-loss and take-profit</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Trading Interface -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-hand-paper me-2"></i>
+                            Manual Trading Interface
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Currency Pair</label>
+                                    <select class="form-select" id="trading-pair">
+                                        <option value="EURUSD">EUR/USD</option>
+                                        <option value="GBPUSD">GBP/USD</option>
+                                        <option value="USDJPY">USD/JPY</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Strategy Type</label>
+                                    <select class="form-select" id="strategy-type">
+                                        <option value="trend_following">Trend Following</option>
+                                        <option value="mean_reversion">Mean Reversion</option>
+                                        <option value="momentum">Momentum</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Trade Amount (USD)</label>
+                                    <input type="number" class="form-control" id="trade-amount" value="1000" min="100" max="10000">
+                                </div>
+                                <button class="btn btn-primary w-100" onclick="executePaperTrade()">
+                                    <i class="fas fa-hand-paper me-1"></i>
+                                    Execute Manual Trade
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="trade-result">
+                                    <div class="text-center text-muted">
+                                        <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                                        <p>Execute a trade to see results</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Recent Trades -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-history me-2"></i>
+                            Recent Trades
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="recent-trades">
+                            <div class="text-center text-muted">
+                                <i class="fas fa-clock fa-2x mb-2"></i>
+                                <p>No trades yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-server me-2"></i>
+                            System Status
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>OANDA API</span>
+                            <span class="status-indicator status-online"></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>News API</span>
+                            <span class="status-indicator status-online"></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>AI Models</span>
+                            <span class="status-indicator status-online"></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Database</span>
+                            <span class="status-indicator status-online"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Latest News -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-newspaper me-2"></i>
+                            Market News
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="market-news">
+                            <div class="text-center">
+                                <div class="loading"></div>
+                                <p class="mt-2">Loading news...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

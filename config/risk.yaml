@@ -1,0 +1,180 @@
+# Risk Management Configuration
+# Production-hardened risk parameters
+
+# Value at Risk (VaR) Settings
+var:
+  confidence_level: 0.95  # 95% confidence level
+  time_horizon: 1  # 1 day horizon
+  max_var: 0.02  # 2% maximum VaR
+  calculation_method: "historical"  # historical, parametric, monte_carlo
+  lookback_period: 252  # 1 year of trading days
+
+# Conditional Value at Risk (CVaR)
+cvar:
+  confidence_level: 0.95  # 95% confidence level
+  max_cvar: 0.03  # 3% maximum CVaR
+
+# Drawdown Controls
+drawdown:
+  max_drawdown: 0.15  # 15% maximum drawdown
+  warning_threshold: 0.10  # 10% warning threshold
+  recovery_threshold: 0.05  # 5% recovery threshold
+  calculation_method: "peak_to_trough"  # peak_to_trough, rolling
+
+# Volatility Controls
+volatility:
+  max_volatility: 0.20  # 20% maximum volatility
+  min_volatility: 0.05  # 5% minimum volatility
+  calculation_period: 30  # 30-day rolling window
+  annualization_factor: 252  # Trading days per year
+
+# Correlation Controls
+correlation:
+  max_correlation: 0.7  # Maximum correlation between positions
+  correlation_window: 60  # 60-day correlation window
+  min_correlation: -0.3  # Minimum correlation (for diversification)
+
+# Position Limits
+position_limits:
+  max_position_size: 0.1  # 10% of portfolio per position
+  max_total_exposure: 0.5  # 50% of portfolio total exposure
+  max_sector_exposure: 0.3  # 30% per sector
+  max_asset_class_exposure: 0.4  # 40% per asset class
+  min_position_size: 0.01  # 1% minimum position size
+
+# Leverage Controls
+leverage:
+  max_leverage: 2.0  # Maximum 2:1 leverage
+  margin_requirement: 0.5  # 50% margin requirement
+  maintenance_margin: 0.25  # 25% maintenance margin
+
+# Liquidity Controls
+liquidity:
+  min_volume: 1000000  # Minimum daily volume (USD)
+  max_spread: 0.002  # Maximum 0.2% spread
+  min_market_cap: 1000000000  # Minimum $1B market cap
+  max_slippage: 0.001  # Maximum 0.1% slippage
+
+# Stress Testing
+stress_testing:
+  enabled: true
+  scenarios:
+    - name: "market_crash"
+      equity_shock: -0.20  # 20% equity decline
+      volatility_shock: 2.0  # 2x volatility increase
+      correlation_shock: 0.3  # 30% correlation increase
+      
+    - name: "interest_rate_shock"
+      rate_change: 0.02  # 2% rate increase
+      duration_impact: 0.1  # 10% duration impact
+      
+    - name: "currency_crisis"
+      currency_shock: -0.15  # 15% currency decline
+      correlation_breakdown: true
+      
+    - name: "liquidity_crisis"
+      volume_reduction: 0.5  # 50% volume reduction
+      spread_widening: 3.0  # 3x spread widening
+
+# Risk Metrics Thresholds
+risk_metrics:
+  sharpe_ratio:
+    minimum: 0.5
+    target: 1.5
+    warning: 0.8
+    
+  calmar_ratio:
+    minimum: 1.0
+    target: 2.0
+    warning: 1.5
+    
+  sortino_ratio:
+    minimum: 0.5
+    target: 1.5
+    warning: 0.8
+    
+  information_ratio:
+    minimum: 0.3
+    target: 1.0
+    warning: 0.6
+
+# Real-time Monitoring
+monitoring:
+  update_frequency: 1  # 1 second update frequency
+  alert_thresholds:
+    var_breach: 0.8  # Alert at 80% of VaR limit
+    drawdown_warning: 0.8  # Alert at 80% of drawdown limit
+    volatility_warning: 0.8  # Alert at 80% of volatility limit
+    correlation_warning: 0.8  # Alert at 80% of correlation limit
+    
+  notification_channels:
+    - email
+    - sms
+    - slack
+    - webhook
+
+# Emergency Controls
+emergency:
+  auto_stop:
+    on_var_breach: true
+    on_drawdown_breach: true
+    on_volatility_breach: true
+    on_correlation_breach: true
+    
+  position_reduction:
+    on_warning: 0.5  # Reduce positions by 50% on warning
+    on_breach: 1.0  # Close all positions on breach
+    
+  circuit_breakers:
+    daily_loss_limit: 0.05  # 5% daily loss limit
+    weekly_loss_limit: 0.10  # 10% weekly loss limit
+    monthly_loss_limit: 0.15  # 15% monthly loss limit
+
+# Risk Attribution
+attribution:
+  enabled: true
+  factors:
+    - market
+    - sector
+    - style
+    - currency
+    - interest_rate
+    - volatility
+    - liquidity
+    
+  calculation_frequency: "daily"
+  lookback_period: 252  # 1 year
+
+# Backtesting Validation
+backtesting:
+  walk_forward:
+    enabled: true
+    window_size: 252  # 1 year
+    step_size: 63  # 3 months
+    
+  monte_carlo:
+    enabled: true
+    simulations: 10000
+    confidence_level: 0.95
+    
+  stress_testing:
+    enabled: true
+    scenarios: 1000
+    confidence_level: 0.99
+
+# Regulatory Compliance
+compliance:
+  basel_iii:
+    enabled: true
+    capital_adequacy_ratio: 0.08  # 8% minimum CAR
+    leverage_ratio: 0.03  # 3% minimum leverage ratio
+    
+  dodd_frank:
+    enabled: true
+    volcker_rule: true
+    position_limits: true
+    
+  sec:
+    enabled: true
+    reporting_frequency: "daily"
+    position_disclosure: true

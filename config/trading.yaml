@@ -1,0 +1,147 @@
+# Trading Configuration
+# Production-hardened trading parameters
+
+# Position Management
+position_limits:
+  max_position_size: 0.1  # 10% of portfolio per position
+  max_total_exposure: 0.5  # 50% of portfolio total exposure
+  max_sector_exposure: 0.3  # 30% per sector
+  max_correlation: 0.7  # Maximum correlation between positions
+  min_position_size: 0.01  # 1% minimum position size
+
+# Risk Management
+risk_limits:
+  max_daily_loss: 0.05  # 5% daily loss limit
+  max_drawdown: 0.15  # 15% maximum drawdown
+  max_unrealized_loss: 0.10  # 10% unrealized loss limit
+  max_var: 0.02  # 2% Value at Risk
+  max_volatility: 0.20  # 20% volatility limit
+  min_sharpe: 0.5  # Minimum Sharpe ratio
+
+# Trading Parameters
+trading:
+  default_stop_loss: 0.02  # 2% default stop loss
+  default_take_profit: 0.04  # 4% default take profit
+  trailing_stop: true  # Enable trailing stops
+  trailing_stop_distance: 0.01  # 1% trailing stop distance
+  max_positions: 10  # Maximum concurrent positions
+  min_volume: 1000000  # Minimum volume for trading (USD)
+
+# Execution Parameters
+execution:
+  max_slippage: 0.001  # 0.1% maximum slippage
+  execution_timeout: 30  # 30 seconds execution timeout
+  retry_attempts: 3  # Number of retry attempts
+  partial_fills: true  # Allow partial fills
+  market_orders: true  # Use market orders for execution
+
+# Strategy Parameters
+strategies:
+  ema_crossover:
+    enabled: true
+    short_period: 12
+    long_period: 26
+    risk_pct: 0.02
+    max_positions: 3
+    
+  rsi_mean_reversion:
+    enabled: true
+    period: 14
+    oversold: 30
+    overbought: 70
+    risk_pct: 0.02
+    max_positions: 3
+    
+  bollinger_bands:
+    enabled: true
+    period: 20
+    std_dev: 2
+    risk_pct: 0.02
+    max_positions: 3
+    
+  macd:
+    enabled: true
+    fast_period: 12
+    slow_period: 26
+    signal_period: 9
+    risk_pct: 0.02
+    max_positions: 3
+
+# Timeframes
+timeframes:
+  - 1m
+  - 5m
+  - 15m
+  - 1h
+  - 4h
+  - 1d
+
+# Asset Classes
+assets:
+  forex:
+    enabled: true
+    pairs:
+      - EUR_USD
+      - GBP_USD
+      - USD_JPY
+      - USD_CHF
+      - AUD_USD
+      - USD_CAD
+      - NZD_USD
+    max_positions: 5
+    
+  stocks:
+    enabled: true
+    symbols:
+      - AAPL
+      - MSFT
+      - GOOGL
+      - AMZN
+      - TSLA
+    max_positions: 3
+    
+  crypto:
+    enabled: false  # Disabled by default
+    pairs:
+      - BTC_USD
+      - ETH_USD
+    max_positions: 2
+
+# Market Hours
+market_hours:
+  forex:
+    open: "00:00"
+    close: "23:59"
+    timezone: "UTC"
+    
+  stocks:
+    open: "09:30"
+    close: "16:00"
+    timezone: "America/New_York"
+    
+  crypto:
+    open: "00:00"
+    close: "23:59"
+    timezone: "UTC"
+
+# Performance Targets
+performance_targets:
+  sharpe_ratio: 1.5
+  calmar_ratio: 2.0
+  win_rate: 0.55
+  profit_factor: 1.5
+  max_drawdown: 0.10
+  recovery_factor: 2.0
+
+# Emergency Controls
+emergency:
+  auto_stop_on_drawdown: true
+  auto_stop_on_daily_loss: true
+  auto_stop_on_var_breach: true
+  emergency_contacts:
+    - email: "admin@hedgefund.com"
+    - sms: "+1234567890"
+  notification_channels:
+    - email
+    - sms
+    - slack

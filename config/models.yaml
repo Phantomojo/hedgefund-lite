@@ -1,0 +1,306 @@
+# AI/ML Models Configuration
+# Production-hardened model parameters
+
+# Model Registry
+registry:
+  storage_path: "./data/models"
+  version_control: true
+  model_metadata: true
+  performance_tracking: true
+
+# Model Training
+training:
+  prediction_horizon: 1  # 1 day prediction horizon
+  retraining_frequency: 7  # Retrain every 7 days
+  validation_split: 0.2  # 20% validation split
+  test_split: 0.1  # 10% test split
+  cross_validation_folds: 5  # 5-fold cross validation
+  
+  hyperparameter_optimization:
+    enabled: true
+    method: "optuna"  # optuna, hyperopt, grid_search
+    max_trials: 100
+    timeout_hours: 24
+    
+  feature_selection:
+    enabled: true
+    method: "recursive"  # recursive, lasso, mutual_info
+    max_features: 50
+    min_features: 10
+
+# Ensemble Configuration
+ensemble:
+  enabled: true
+  ensemble_size: 5  # Number of models in ensemble
+  voting_method: "weighted"  # weighted, simple, soft
+  weight_optimization: true
+  diversity_penalty: 0.1  # Penalty for similar models
+  
+  models:
+    - name: "random_forest"
+      weight: 0.3
+      params:
+        n_estimators: 100
+        max_depth: 10
+        min_samples_split: 5
+        
+    - name: "xgboost"
+      weight: 0.3
+      params:
+        n_estimators: 100
+        max_depth: 6
+        learning_rate: 0.1
+        
+    - name: "lightgbm"
+      weight: 0.2
+      params:
+        n_estimators: 100
+        max_depth: 6
+        learning_rate: 0.1
+        
+    - name: "neural_network"
+      weight: 0.1
+      params:
+        hidden_layers: [64, 32, 16]
+        dropout_rate: 0.2
+        learning_rate: 0.001
+        
+    - name: "lstm"
+      weight: 0.1
+      params:
+        sequence_length: 60
+        hidden_units: 50
+        dropout_rate: 0.2
+
+# Feature Engineering
+features:
+  technical_indicators:
+    enabled: true
+    indicators:
+      - sma
+      - ema
+      - rsi
+      - macd
+      - bollinger_bands
+      - stochastic
+      - williams_r
+      - adx
+      - obv
+      - atr
+      
+  fundamental_features:
+    enabled: true
+    features:
+      - pe_ratio
+      - pb_ratio
+      - debt_to_equity
+      - roe
+      - roa
+      - revenue_growth
+      - earnings_growth
+      
+  sentiment_features:
+    enabled: true
+    sources:
+      - news
+      - social_media
+      - analyst_ratings
+      - earnings_calls
+      
+  macroeconomic_features:
+    enabled: true
+    indicators:
+      - gdp_growth
+      - inflation_rate
+      - interest_rate
+      - unemployment_rate
+      - consumer_confidence
+      
+  market_microstructure:
+    enabled: true
+    features:
+      - bid_ask_spread
+      - volume
+      - volatility
+      - liquidity_ratio
+      - order_flow
+
+# Model Performance
+performance:
+  metrics:
+    - mse
+    - mae
+    - rmse
+    - mape
+    - directional_accuracy
+    - sharpe_ratio
+    - sortino_ratio
+    - calmar_ratio
+    
+  thresholds:
+    min_directional_accuracy: 0.55
+    min_sharpe_ratio: 0.5
+    max_mse: 0.01
+    min_r_squared: 0.3
+    
+  backtesting:
+    enabled: true
+    walk_forward: true
+    window_size: 252  # 1 year
+    step_size: 63  # 3 months
+    out_of_sample: true
+
+# Model Monitoring
+monitoring:
+  drift_detection:
+    enabled: true
+    method: "ks_test"  # ks_test, psi, kl_divergence
+    threshold: 0.05
+    window_size: 30  # 30 days
+    
+  performance_degradation:
+    enabled: true
+    metric: "directional_accuracy"
+    threshold: 0.05  # 5% degradation
+    window_size: 30  # 30 days
+    
+  retraining_triggers:
+    - performance_degradation
+    - data_drift
+    - scheduled_retraining
+    - new_data_available
+
+# Deep Learning Models
+deep_learning:
+  lstm:
+    enabled: true
+    architecture:
+      layers: [64, 32, 16]
+      dropout: 0.2
+      recurrent_dropout: 0.2
+    training:
+      batch_size: 32
+      epochs: 100
+      early_stopping: true
+      patience: 10
+      
+  transformer:
+    enabled: false  # Disabled by default (resource intensive)
+    architecture:
+      num_layers: 4
+      num_heads: 8
+      d_model: 128
+      dropout: 0.1
+    training:
+      batch_size: 16
+      epochs: 50
+      learning_rate: 0.0001
+      
+  cnn:
+    enabled: false  # For image-based analysis
+    architecture:
+      filters: [32, 64, 128]
+      kernel_size: 3
+      dropout: 0.2
+    training:
+      batch_size: 32
+      epochs: 50
+
+# Reinforcement Learning
+reinforcement_learning:
+  enabled: false  # Disabled by default
+  algorithm: "ppo"  # ppo, a2c, dqn, sac
+  environment:
+    state_space: "market_data"
+    action_space: "discrete"  # discrete, continuous
+    reward_function: "sharpe_ratio"
+    
+  training:
+    episodes: 1000
+    max_steps: 252  # 1 year
+    learning_rate: 0.0003
+    gamma: 0.99
+    
+  hyperparameters:
+    ppo:
+      clip_ratio: 0.2
+      value_loss_coef: 0.5
+      entropy_coef: 0.01
+      
+    a2c:
+      value_loss_coef: 0.5
+      entropy_coef: 0.01
+      
+    dqn:
+      epsilon_start: 1.0
+      epsilon_end: 0.01
+      epsilon_decay: 0.995
+
+# Natural Language Processing
+nlp:
+  enabled: true
+  models:
+    - name: "sentiment_analyzer"
+      type: "transformer"
+      model_name: "finbert"
+      max_length: 512
+      
+    - name: "news_classifier"
+      type: "transformer"
+      model_name: "distilbert"
+      num_classes: 5
+      
+    - name: "earnings_analyzer"
+      type: "transformer"
+      model_name: "roberta"
+      max_length: 1024
+      
+  preprocessing:
+    remove_stopwords: true
+    lemmatization: true
+    remove_numbers: false
+    remove_punctuation: false
+    
+  features:
+    - sentiment_score
+    - topic_classification
+    - named_entity_recognition
+    - key_phrase_extraction
+
+# Model Deployment
+deployment:
+  strategy: "blue_green"  # blue_green, canary, rolling
+  health_checks: true
+  rollback_threshold: 0.05  # 5% performance degradation
+  canary_percentage: 0.1  # 10% traffic to new model
+  
+  serving:
+    framework: "fastapi"
+    batch_size: 32
+    timeout: 30  # seconds
+    max_concurrent_requests: 100
+    
+  monitoring:
+    prediction_latency: true
+    throughput: true
+    error_rate: true
+    model_performance: true
+
+# Data Pipeline
+data_pipeline:
+  feature_store:
+    enabled: true
+    storage: "redis"
+    ttl: 3600  # 1 hour
+    
+  data_validation:
+    enabled: true
+    schema_validation: true
+    range_validation: true
+    outlier_detection: true
+    
+  data_quality:
+    enabled: true
+    completeness_threshold: 0.95
+    accuracy_threshold: 0.90
+    consistency_threshold: 0.95

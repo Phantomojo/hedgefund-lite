@@ -1,0 +1,113 @@
+{
+  "timestamp": "2025-08-31T12:48:20.055200+00:00",
+  "total_requests": 0,
+  "successful_requests": 0,
+  "failed_requests": 0,
+  "response_times": [],
+  "concurrent_tests": {
+    "load_50": {
+      "total_requests": 50,
+      "successful": 50,
+      "failed": 0,
+      "success_rate": 100.0,
+      "avg_response_time": 0.0037737321853637696,
+      "max_response_time": 0.009005308151245117,
+      "min_response_time": 0.0009624958038330078
+    },
+    "load_200": {
+      "total_requests": 200,
+      "successful": 200,
+      "failed": 0,
+      "success_rate": 100.0,
+      "avg_response_time": 0.015217618942260742,
+      "max_response_time": 0.025519132614135742,
+      "min_response_time": 0.0037775039672851562
+    }
+  },
+  "load_tests": {
+    "rapid_fire": {
+      "duration_seconds": 30,
+      "total_requests": 295,
+      "successful": 295,
+      "failed": 0,
+      "success_rate": 100.0,
+      "avg_response_time": 0.0017071497642387778,
+      "requests_per_second": 9.833333333333334
+    },
+    "memory_leak": {
+      "iterations": 500,
+      "total_time": 0.19136261940002441,
+      "avg_response_time": 0.00037902116775512696,
+      "response_time_degradation": 4.198468379827406,
+      "first_half_avg": 0.0003712282180786133,
+      "second_half_avg": 0.0003868141174316406
+    }
+  },
+  "edge_case_tests": {
+    "total_tests": 7,
+    "expected_failures": 3,
+    "unexpected_successes": 0,
+    "results": [
+      {
+        "success": false,
+        "status_code": 403,
+        "description": "No auth"
+      },
+      {
+        "success": false,
+        "status_code": 404,
+        "response_time": 0.0003311634063720703,
+        "endpoint": "/api/v1/nonexistent",
+        "description": "Invalid endpoint",
+        "response": "{\"detail\":\"Not Found\"}"
+      },
+      {
+        "success": false,
+        "status_code": 422,
+        "response_time": 0.0007922649383544922,
+        "endpoint": "/api/v1/ai/analyze-market",
+        "description": "Invalid data",
+        "response": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"pair\"],\"msg\":\"Field required\",\"input\":{\"invalid\":\"data\"}"
+      },
+      {
+        "success": false,
+        "status_code": 422,
+        "response_time": 0.0007634162902832031,
+        "endpoint": "/api/v1/ai/generate-strategy",
+        "description": "Empty request",
+        "response": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"market_conditions\"],\"msg\":\"Field required\",\"input\":{}}]}"
+      },
+      {
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.0009043216705322266,
+        "endpoint": "/api/v1/ai/analyze-market",
+        "description": "Large data",
+        "response": "{\"pair\":\"EURUSD\",\"timeframe\":\"H1\",\"analysis_type\":\"technical_analysis\",\"prediction\":\"BUY\",\"confidenc"
+      },
+      {
+        "success": false,
+        "status_code": 404,
+        "response_time": 0.0005109310150146484,
+        "endpoint": "/api/v1/data/market-data/EUR/USD",
+        "description": "Special chars in URL",
+        "response": "{\"detail\":\"Not Found\"}"
+      },
+      {
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.001705169677734375,
+        "endpoint": "/api/v1/data/market-data/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "description": "Very long parameter",
+        "response": "{\"pair\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    ],
+    "data_consistency": {
+      "market_data_consistent": true,
+      "models_consistent": true,
+      "market_data_samples": 0,
+      "models_samples": 0
+    }
+  },
+  "performance_metrics": {}
+}

@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-08-31T13:23:31.650377+00:00",
+  "overall_status": "excellent",
+  "core_system": {},
+  "authentication": {
+    "login": {
+      "status": "working"
+    }
+  },
+  "trading_components": {},
+  "ai_components": {},
+  "data_components": {},
+  "monitoring": {},
+  "issues": [],
+  "recommendations": [],
+  "success_rate": 100.0,
+  "working_components": [
+    "Core: /",
+    "Core: /health",
+    "Core: /metrics",
+    "Core: /docs",
+    "Trading: /api/v1/trading/positions",
+    "Trading: /api/v1/trading/orders",
+    "Trading: /api/v1/trading/trades",
+    "Trading: /api/v1/portfolio/portfolio/metrics",
+    "Trading: /api/v1/risk/metrics",
+    "AI: /api/v1/ai/analyze-market",
+    "AI: /api/v1/ai/generate-strategy",
+    "AI: /api/v1/ai/models",
+    "AI: /api/v1/strategies/strategies",
+    "Data: /api/v1/data/market-data/EUR_USD",
+    "Data: /api/v1/data/news",
+    "Data: /api/v1/data/sentiment",
+    "Data: /api/v1/data/data-summary"
+  ],
+  "broken_components": []
+}

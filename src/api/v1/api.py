@@ -13,7 +13,8 @@ from src.api.v1.endpoints import (
     backtest,
     monitoring,
     auth,
-    ai
+    ai,
+    ai_models
 )
 
 api_router = APIRouter()
@@ -28,3 +29,4 @@ api_router.include_router(data.router, prefix="/data", tags=["data"])
 api_router.include_router(backtest.router, prefix="/backtest", tags=["backtest"])
 api_router.include_router(monitoring.router, prefix="/monitoring", tags=["monitoring"])
 api_router.include_router(ai.router, prefix="/ai", tags=["ai"])
+api_router.include_router(ai_models.router, prefix="/ai-models", tags=["ai models"])

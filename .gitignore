@@ -1,8 +1,12 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
 *.so
+
+# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -16,6 +20,7 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -23,6 +28,8 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -43,7 +50,6 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-cover/
 
 # Translations
 *.mo
@@ -66,7 +72,6 @@ instance/
 docs/_build/
 
 # PyBuilder
-.pybuilder/
 target/
 
 # Jupyter Notebook
@@ -80,15 +85,13 @@ ipython_config.py
 .python-version
 
 # pipenv
-Pipfile.lock
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
 
-# poetry
-poetry.lock
-
-# pdm
-.pdm.toml
-
-# PEP 582
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
 # Celery stuff
@@ -125,61 +128,34 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-.idea/
-
-# VS Code
-.vscode/
-
 # Trading System Specific
-# API Keys and Secrets
-.env
-config/secrets.yml
-config/api_keys.yml
-*.key
-*.pem
+# ========================
 
-# Database
+# API Keys and Secrets
+config/api_keys.py
+config/secrets.py
+.env.local
+.env.production
+
+# Database files
 *.db
 *.sqlite
 *.sqlite3
 
-# Logs
+# Log files
 logs/
 *.log
-log/
 
-# Data
-data/
-market_data/
-historical_data/
-backtest_results/
-
-# Models
-models/
-*.pkl
-*.joblib
-*.h5
-*.onnx
-
-# Cache
+# Cache files
 cache/
 .cache/
-redis_dump.rdb
 
 # Temporary files
 tmp/
 temp/
 *.tmp
-*.temp
 
-# OS specific
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -188,43 +164,22 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Docker
-.dockerignore
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # Backup files
 *.bak
 *.backup
 *.old
 
-# Test results
-test_results/
-coverage/
+# Test coverage
 .coverage
+htmlcov/
 
-# Performance profiling
-*.prof
-*.lprof
-
-# Jupyter
-.ipynb_checkpoints/
-
-# MLflow
-mlruns/
-
-# Weights & Biases
-wandb/
-
-# TensorBoard
-runs/
-tensorboard_logs/
-
-# Model artifacts
-artifacts/
-checkpoints/
-
-# Trading specific
-trades/
-positions/
-orders/
-pnl/
-drawdown/
+# Local configuration
+local_config.py
+config_local.py

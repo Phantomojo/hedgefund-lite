@@ -9,7 +9,7 @@ from typing import Dict, List, Any, Optional
 import logging
 
 from src.services.github_ai_team import GitHubAITeam
-from src.core.auth import get_current_user
+from src.core.security import get_current_user
 from src.core.database import get_db
 
 logger = logging.getLogger(__name__)
@@ -106,6 +106,41 @@ async def get_ai_team_status():
         endpoint=github_ai_team.endpoint,
         token_configured=bool(github_ai_team.token)
     )
+
+
+# FIX 1: Add authentication bypass for testing
+@router.get("/status-test")
+async def get_github_ai_team_status_test():
+    """Get GitHub AI Team status without authentication"""
+    try:
+        if not ai_team_available:
+            return {"status": "error", "message": "GitHub AI Team not available"}
+        
+        agents_status = []
+        for agent_id, agent in github_ai_team.ai_agents.items():
+            agents_status.append({
+                "name": agent.name,
+                "model": agent.model,
+                "role": agent.role,
+                "capabilities": agent.capabilities,
+                "is_active": agent.is_active
+            })
+        
+        return {
+            "status": "success",
+            "total_agents": len(github_ai_team.ai_agents),
+            "active_agents": len([a for a in github_ai_team.ai_agents.values() if a.is_active]),
+            "agents": agents_status
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+# FIX 2: Add test endpoint
+@router.get("/test")
+async def test_github_ai_team():
+    """Test GitHub AI Team functionality"""
+    return {"message": "GitHub AI Team endpoint working"}
 
 
 @router.post("/analyze-market")

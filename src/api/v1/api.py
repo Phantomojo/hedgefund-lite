@@ -16,7 +16,11 @@ from src.api.v1.endpoints import (
     ai,
     ai_models,
     github_ai_team,
-    ollama
+    ollama,
+    ai_trading,
+    comprehensive_analysis,
+    financial_intelligence,
+    features
 )
 
 api_router = APIRouter()
@@ -34,3 +38,7 @@ api_router.include_router(ai.router, prefix="/ai", tags=["ai"])
 api_router.include_router(ai_models.router, prefix="/ai-models", tags=["ai models"])
 api_router.include_router(github_ai_team.router, prefix="/github-ai-team", tags=["github ai team"])
 api_router.include_router(ollama.router, prefix="/ollama", tags=["ollama"])
+api_router.include_router(ai_trading.router, prefix="/ai-trading", tags=["ai trading"])
+api_router.include_router(comprehensive_analysis.router, prefix="/comprehensive-analysis", tags=["comprehensive analysis"])
+api_router.include_router(financial_intelligence.router, prefix="/financial-intelligence", tags=["financial intelligence"])
+api_router.include_router(features.router, prefix="/features", tags=["features"])

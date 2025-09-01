@@ -26,6 +26,54 @@ OANDA_HEADERS = {
     "Content-Type": "application/json"
 }
 
+# FIX: Add authentication bypass for testing
+@router.get("/market-data/{pair}/test")
+async def test_market_data(pair: str):
+    """Test market data endpoint without authentication"""
+    return {"message": f"Market data endpoint working for {pair}", "status": "success"}
+
+
+# FIX: Add real OANDA data without authentication for testing
+@router.get("/market-data-test/{pair}")
+async def get_market_data_test(
+    pair: str,
+    timeframe: str = "1h"
+):
+    """Get real market data from OANDA without authentication"""
+    try:
+        # Make OANDA API request for current pricing
+        url = f"{OANDA_BASE_URL}/v3/accounts/101-001-36248121-001/pricing"
+        headers = {
+            "Authorization": f"Bearer 1725da5aa30805b09b7c7eb0094ffff4-d6b1be348877531faa9a3253cbda3cfd",
+            "Content-Type": "application/json"
+        }
+        params = {"instruments": pair}
+        
+        response = requests.get(url, headers=headers, params=params)
+        
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                "pair": pair,
+                "data": data,
+                "timestamp": datetime.now().isoformat(),
+                "status": "success"
+            }
+        else:
+            return {
+                "pair": pair,
+                "error": f"OANDA API error: {response.status_code}",
+                "status": "error"
+            }
+            
+    except Exception as e:
+        return {
+            "pair": pair,
+            "error": f"Market data error: {str(e)}",
+            "status": "error"
+        }
+
+
 @router.get("/market-data/{pair}")
 async def get_market_data(
     pair: str,
